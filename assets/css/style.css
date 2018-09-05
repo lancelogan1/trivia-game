@@ -1,0 +1,12 @@
+body{
+    background-image: url("../images/game-background1.jpg");
+    font-family: 'Press Start 2P', cursive;
+}
+
+.trivia{
+    text-align: center;
+    border: 5px;
+    background-color: rgba(0, 255, 255, 0.317);
+    margin-top: -10px;
+}
+
