@@ -112,7 +112,8 @@ $(document).ready(function () {
 
     function wrong() {
         wrongAnswer++;
-        alert('Wrong');
+       alert('Wrong');
+        
     };
 
     function score() {

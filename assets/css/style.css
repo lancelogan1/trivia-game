@@ -19,3 +19,9 @@ body{
 .question{
     font-size: 25px;
 }
+
+.choice:hover{
+    color:green;
+    background-color: rgb(193, 205, 205);
+    transform: translateY(1px);
+}
