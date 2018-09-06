@@ -107,13 +107,15 @@ $(document).ready(function () {
     //answers to the array 
     function right() {
         rightAnswer++;
-        alert('Correct');
+        //alert('Correct');
+        $('.timer').html('<h3>' +questionsArray[questionIndex].answer + '<h3>');
+        console.log('change');
     };
 
     function wrong() {
         wrongAnswer++;
        alert('Wrong');
-        
+       $('.timer').html('<h3>' +questionsArray[questionIndex].answer + '<h3>');
     };
 
     function score() {
@@ -140,11 +142,11 @@ $(document).ready(function () {
             timer.time--;
             if(timer.time >= 0){
                 $('.timer').html("<div class='rounded p-2'>" + timer.time + ' seconds remaining</div>');
-            } else if (timer.tim <= 0) {
+            } else if (timer.time <= 0) {
                 questionIndex++;
                 wrong();
                 timer.reset();
-                if (questionIndex < 5) {
+                if (questionIndex < questionsArray.length) {
                     showQuestions(questionIndex);
                 } else {
                     $('.choice').hide();
@@ -186,16 +188,18 @@ $(document).ready(function () {
         } else if (userAnswer === 'd') {
             wrong();
         }
-
-        $('.question').text('');
+        setTimeout(function(){ $('.question').text('');
         $('#a').text('');
         $('#b').text('');
         $('#c').text('');
         $('#d').text('');
+        }, 3000);
+        
         questionIndex++;
-
         if (questionIndex < questionsArray.length) {
-            showQuestions(questionIndex);
+            setTimeout(function(){
+                showQuestions(questionIndex);
+            },3000);
         } else {
             $('.choice').hide();
             score();
