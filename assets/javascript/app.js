@@ -15,10 +15,10 @@
 let question1 = {
     question: "What continent is also a country?",
     choices: [
-        "a: USA",
+        "a: Antarctica",
         "b: Austrailia",
         "c: The Moon",
-        "d: Antarctica"],
+        "d: USA"],
     answer: "b: Austrailia",
     condition: [false, true, false, false]
 }
@@ -67,7 +67,7 @@ let question5 = {
     condition: [true, false, false, false]
 }
 
-let time = 120;
+
 let score = 0;
 let questionsArray = [question1, question2, question3, question4, question5];
 let rightAnswer = 0;
@@ -85,6 +85,7 @@ $(document).ready(function () {
     $('embed').hide();
 
     function showQuestions(questionSelect) {
+        timer.reset();
         $(".question").html(questionsArray[questionSelect].question);
         //choices 
         $("#a").text(questionsArray[questionSelect].choices[0]).show();
@@ -98,7 +99,7 @@ $(document).ready(function () {
         // $('.startBtn').append('<button class="start">Start</button>');
         // $('.start').on('click', function(){
         //     $(this).hide();
-
+        timer.start();
         // })
         showQuestions(questionIndex);
     }
@@ -118,7 +119,40 @@ $(document).ready(function () {
         $('.question').empty();
         $('.question').append('<p>' + rightAnswer + ' correct</p>');
         $('.question').append('<p>' + wrongAnswer + ' wrong</p>');
+        timer.stop();
+        $('.timer').emtpy();
     };
+
+    let timer = {
+        time:5,
+        reset: function(){
+            this.time = 11;
+            $('.timer').html('<div>' + this.time + ' seconds remaining</div>');
+        },
+        start: function() {
+            counter = setInterval(timer.count,1000);
+        },
+        stop: function() {
+            clearInterval(counter);
+        },
+        count: function(){
+            timer.time--;
+            if(timer.time >= 0){
+                $('.timer').html("<div class='rounded p-2'>" + timer.time + ' seconds remaining</div>');
+            } else if (timer.tim <= 0) {
+                questionIndex++;
+                wrong();
+                timer.reset();
+                if (questionIndex < 5) {
+                    showQuestions(questionIndex);
+                } else {
+                    $('.choice').hide();
+                    score();
+                    
+                }
+            }
+        }
+    }
 
     start();
     $('.choice').on('click', function () {
